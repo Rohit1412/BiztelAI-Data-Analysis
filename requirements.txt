@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 flask
 flask-cors
 nltk
@@ -23,4 +24,31 @@ aiohttp
 aiodns
 pyarrow
 fastparquet
+=======
+flask
+flask-cors
+nltk
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+transformers
+torch
+wordcloud
+plotly
+python-dotenv
+gunicorn
+swifter
+psutil
+cachetools
+Flask-JWT-Extended
+Flask-Limiter
+uvicorn
+pytest
+aiohttp
+aiodns
+pyarrow
+fastparquet
+>>>>>>> 5d96285edcdaab24a8fcf7efb1d7ec4f7b04bb22
 tabulate
