@@ -1,0 +1,73 @@
+{
+    "name": "BiztelAI_DataPipeline",
+    "description": "Data processing pipeline for BiztelAI dataset",
+    "version": "1.0.0",
+    "input_file": "BiztelAI_DS_Dataset_Mar'25.json",
+    "output_file": "processed_data.csv",
+    "logging": {
+        "level": "INFO",
+        "file": "data_processing.log",
+        "console": true
+    },
+    "processors": [
+        {
+            "type": "loader",
+            "name": "DataLoader",
+            "enabled": true,
+            "config": {
+                "file_path": "BiztelAI_DS_Dataset_Mar'25.json",
+                "timing": true,
+                "logging": true
+            }
+        },
+        {
+            "type": "cleaner",
+            "name": "DataCleaner",
+            "enabled": true,
+            "config": {
+                "timing": true,
+                "logging": true,
+                "handle_missing": true,
+                "remove_duplicates": true,
+                "clean_text": true,
+                "fix_data_types": true,
+                "text_columns": ["message", "sentiment", "knowledge_source"],
+                "cat_columns": ["agent", "config", "turn_rating"]
+            }
+        },
+        {
+            "type": "text_processor",
+            "name": "TextPreprocessor",
+            "enabled": true,
+            "config": {
+                "timing": true,
+                "logging": true,
+                "text_column": "message_clean",
+                "perform_tokenization": true,
+                "remove_stopwords": true,
+                "perform_lemmatization": true
+            }
+        },
+        {
+            "type": "transformer",
+            "name": "FeatureTransformer",
+            "enabled": true,
+            "config": {
+                "timing": true,
+                "logging": true,
+                "categorical_columns": ["agent", "config", "turn_rating", "sentiment"],
+                "create_length_feature": true,
+                "create_word_count_feature": true
+            }
+        }
+    ],
+    "caching": {
+        "enabled": true,
+        "intermediate_results": false,
+        "cache_dir": ".cache"
+    },
+    "parallelism": {
+        "enabled": false,
+        "max_workers": 4
+    }
+} 
